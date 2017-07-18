@@ -1,0 +1,22 @@
+doctype html
+html(ng-app='urlShortn')
+  head
+    base(href="/")
+    link(rel="stylesheet", href="/vendor/bootstrap/dist/css/bootstrap.css")
+    title URL Shortener
+  body
+    div(ui-view='section')
+
+
+  script(src="/vendor/jquery/dist/jquery.min.js")
+  script(src='/vendor/angular/angular.min.js')
+  script(src='/vendor/bootstrap/dist/js/bootstrap.js')
+  script(src='/vendor/angular-resource/angular-resource.min.js')
+  script(src='/vendor/angular-ui-router/release/angular-ui-router.min.js')
+  script(src='/vendor/angular-route/angular-route.min.js')
+  script(src='/vendor/angular-loading-bar/src/loading-bar.js')
+  script(src='/vendor/angular-animate/angular-animate.js')
+  script(src='/vendor/angular-sanitize/angular-sanitize.js')
+
+  script(src="/js/app/app.js")
+  script(src="/js/app/controllers/mainController.js")
