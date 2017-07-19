@@ -19,7 +19,7 @@ var urlShortnConfig = ['$stateProvider','$locationProvider','$urlRouterProvider'
         }
 
     });
-    $stateProvider.state("redirect", {
+    /*$stateProvider.state("redirect", {
 
         url: '/:shortUrl',
         views: {
@@ -29,7 +29,7 @@ var urlShortnConfig = ['$stateProvider','$locationProvider','$urlRouterProvider'
             }
         }
 
-    });
+    });*/
 }];
 
 var app = angular.module('urlShortn', [

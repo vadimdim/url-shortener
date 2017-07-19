@@ -19,15 +19,14 @@ const Router = require('koa-router');
 const router = new Router();
 
 
-router.get(/^\/(?!.*api).*/, async function(ctx) {
-    ctx.body = ctx.render('./templates/index.pug')
-});
-
-
-router.get("/api/shortUrl/:short", async function(ctx) {
+router.get("/:short", async function(ctx) {
 
     let url = await db.getAsync(String(ctx.params.short));
-    ctx.body = url;
+    if(url !== null){
+        ctx.redirect(url);
+    }else{
+        ctx.body = ctx.render('./templates/index.pug');
+    }
 
 });
 router.post("/api/shortUrl", async function(ctx) {
@@ -36,10 +35,11 @@ router.post("/api/shortUrl", async function(ctx) {
     let fullUrl = ctx.request.body.fullUrl;
 
     let fullUrlStatus = await checkUrl(fullUrl);
+    console.log('fullUrlStatus',fullUrlStatus);
 
     if(fullUrlStatus>=400){
         ctx.status = fullUrlStatus;
-        return ctx.body = {error:"Original URL is invalid"};
+        return ctx.body = "Original URL is invalid";
     }
 
     if(!shortUrl || fullUrl.length<0){
@@ -52,7 +52,7 @@ router.post("/api/shortUrl", async function(ctx) {
 
     if(url !== null){
         ctx.status = 403;
-        return ctx.body = {error:"Short URL already exist"};
+        return ctx.body = "Short URL already exist";
     }
 
     db.set(shortUrl,fullUrl,'EX', 60*60*24*15);
@@ -63,6 +63,9 @@ router.post("/api/shortUrl", async function(ctx) {
 
 });
 
+router.get(/^\/(?!.*api).*/, async function(ctx) {
+    ctx.body = ctx.render('./templates/index.pug');
+});
 
 app.use(router.routes());
 console.log('started');

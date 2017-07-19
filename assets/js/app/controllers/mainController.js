@@ -19,7 +19,7 @@ function mainController($scope,$stateParams,$http,$location){
 
 
         let exp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
-        let expLetters = /^[A-zА-яЁё]+$/;
+        let expLetters = /^[A-zА-яЁё]{1,20}$/;
 
         if(!$scope.fullUrl){
             $scope.fullURLError = true;
@@ -47,7 +47,8 @@ function mainController($scope,$stateParams,$http,$location){
                 $scope.resUrl = $location.$$host + '/' + response.data.shortUrl;
             },
             function errorCallback(response) {
-                $scope.errorMsg = response.data.error;
+                console.log('resp',response);
+                $scope.errorMsg = response.data;
             });
 
     };

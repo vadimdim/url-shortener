@@ -8,13 +8,17 @@ module.exports = function(url) {
             https.get(url,  function(res) {
                 resolve(res.statusCode);
             })
-                .on('error', reject);
+                .on('error', function(err){
+                    resolve(404);
+                });
 
         }else{
             http.get(url,  function(res) {
                 resolve(res.statusCode);
             })
-                .on('error', reject);
+                .on('error', function(err){
+                    resolve(404);
+                });
 
         }
 
