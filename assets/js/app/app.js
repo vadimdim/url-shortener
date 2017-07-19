@@ -3,8 +3,7 @@
 angular.module('urlShortn.controllers',[]);
 
 var urlShortnConfig = ['$stateProvider','$locationProvider','$urlRouterProvider','cfpLoadingBarProvider','$httpProvider', function($stateProvider,$locationProvider,$urlRouterProvider,cfpLoadingBarProvider,$httpProvider){
-    //$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
-    $locationProvider.html5Mode(true);//.hashPrefix('^');
+    $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/');
     cfpLoadingBarProvider.includeSpinner = true;
 
@@ -40,10 +39,6 @@ var app = angular.module('urlShortn', [
     'ngAnimate',
     'ngSanitize',
     'ngRoute'
-]).config(urlShortnConfig).filter('to_trusted', ['$sce', function($sce){
-    return function(text) {
-        return $sce.trustAsHtml(text);
-    };
-}]);
+]).config(urlShortnConfig);
 
 app.run();
